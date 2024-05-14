@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Suwit Jawa v.20</title>
+    <!-- <link rel="stylesheet" href="boostrap/css/bootstrap.min.css" /> -->
+    <style>
+      body {
+        background-color: cadetblue;
+        text-align: center;
+      }
+
+      .container {
+        background-color: rgb(0, 0, 0);
+        width: 1200px;
+        height: 700px;
+        margin: auto;
+      }
+
+      .pilihan-computer {
+        background-color: rgb(0, 0, 0);
+        width: 500px;
+        height: 300px;
+        margin: 2rem auto;
+      }
+
+      .pilihan-computer img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-top: 5rem;
+        border: 5px solid goldenrod;
+        padding: 1rem;
+      }
+
+      .skor {
+        background-color: antiquewhite;
+        width: 200px;
+        height: 100px;
+        margin: auto;
+        z-index: 9999;
+        position: relative;
+        border-radius: 1rem;
+        top: -5rem;
+      }
+
+      .pilihan-player {
+        background-color: rgb(0, 0, 0);
+        width: 500px;
+        height: 300px;
+        margin: -7rem auto;
+      }
+
+      .pilihan-player .gajah {
+        width: 100px;
+        height: 100px;
+        float: left;
+        border: 5px solid goldenrod;
+        border-radius: 50%;
+        margin-left: 1.5rem;
+        margin-top: 5rem;
+        padding: 1rem;
+      }
+      .pilihan-player .orang {
+        width: 100px;
+        height: 100px;
+        float: left;
+        border: 5px solid goldenrod;
+        border-radius: 50%;
+        margin-left: 1.5rem;
+        margin-top: 5rem;
+        padding: 1rem;
+      }
+      .pilihan-player .semut {
+        width: 100px;
+        height: 100px;
+        float: left;
+        border: 5px solid goldenrod;
+        border-radius: 50%;
+        margin-left: 1.5rem;
+        margin-top: 4rem;
+        padding: 1rem;
+      }
+      .papan {
+        background-color: aqua;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- <div class="papan"></div> -->
+      <div class="pilihan-computer">
+        <img src="gajah.png" alt="" class="img-computer" />
+      </div>
+      <div class="skor"></div>
+      <div class="pilihan-player">
+        <li>
+          <img src="gajah.png" alt="" class="gajah" />
+
+          <img src="orang.png" alt="" class="orang" />
+
+          <img src="semut.png" alt="" class="semut" />
+        </li>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function comp() {
+      const comp = Math.random();
+
+      if (comp < 0.34) return "gajah";
+      if (comp >= 0.34 && comp < 0.67) return "orang";
+      return "semut";
+      console.log(comp);
+    }
+
+    function gethasil(comp, player) {
+      if (player == comp) return "SERI";
+      if (player == "gajah") return comp == "orang" ? "MENANG" : "KALAH";
+      if (player == "orang") return comp == "gajah" ? "KALAH" : "MENANG";
+      if (player == "semut") return comp == "gajah" ? "MENANG" : "KALAH";
+    }
+
+    // COba
+    const Pilplayer = document.querySelectorAll("li img");
+    Pilplayer.forEach(function (pil) {
+      pil.addEventListener("click", function () {
+        const Computer = comp();
+        const Player = pil.className;
+        const hasil = gethasil(Computer, Player);
+        console.log(hasil);
+        // Skor
+        const Skors = document.querySelector(".skor");
+        Skors.innerHTML = hasil;
+        Skors.style.fontSize = "2rem";
+
+        // Img Komputer
+        const Putar = document.querySelector(".img-computer");
+        Putar.setAttribute("src", Computer + ".png");
+
+        // Style
+      });
+    });
+
+    // End COba
+
+    // const Gajah = document.querySelector(".gajah");
+    // const Orang = document.querySelector(".orang");
+    // const Semut = document.querySelector(".semut");
+
+    // Gajah.addEventListener("click", function () {
+    //   const Pilcomp = comp();
+    //   const PilPlayer = Gajah.className;
+    //   const hasil = gethasil(Pilcomp, PilPlayer);
+    //   const Skors = document.querySelector(".skor");
+    //   Skors.innerHTML = hasil;
+    //   Skors.style.fontSize = "2rem";
+
+    //   // Img Komputer
+    //   const Putar = document.querySelector(".img-computer");
+    //   Putar.setAttribute("src", Pilcomp + ".png");
+
+    //   // Papan skor
+    // });
+
+    // // Style
+    // Gajah.addEventListener("mouseenter", function () {
+    //   Gajah.style.backgroundColor = "white";
+    // });
+    // Gajah.addEventListener("mouseleave", function () {
+    //   Gajah.style.backgroundColor = "black";
+    // });
+    // // End
+    // Orang.addEventListener("click", function () {
+    //   const Pilcomp = comp();
+    //   const PilPlayer = Orang.className;
+    //   const hasil = gethasil(Pilcomp, PilPlayer);
+    //   const Skors = document.querySelector(".skor");
+    //   Skors.innerHTML = hasil;
+    //   Skors.style.fontSize = "2rem";
+    //   const Putar = document.querySelector(".img-computer");
+    //   Putar.setAttribute("src", Pilcomp + ".png");
+    // });
+    // // Style
+    // Orang.addEventListener("mouseenter", function () {
+    //   Orang.style.backgroundColor = "white";
+    // });
+    // Orang.addEventListener("mouseleave", function () {
+    //   Orang.style.backgroundColor = "black";
+    // });
+    // // End
+    // Semut.addEventListener("click", function () {
+    //   const Pilcomp = comp();
+    //   const PilPlayer = Semut.className;
+    //   const hasil = gethasil(Pilcomp, PilPlayer);
+    //   const Skors = document.querySelector(".skor");
+    //   Skors.innerHTML = hasil;
+    //   Skors.style.fontSize = "2rem";
+    //   const Putar = document.querySelector(".img-computer");
+    //   Putar.setAttribute("src", Pilcomp + ".png");
+    // });
+    // // Style
+    // Semut.addEventListener("mouseenter", function () {
+    //   Semut.style.backgroundColor = "white";
+    // });
+    // Semut.addEventListener("mouseleave", function () {
+    //   Semut.style.backgroundColor = "black";
+    // });
+    // // End
+
+    // Papan Skor
+  </script>
+</html>
